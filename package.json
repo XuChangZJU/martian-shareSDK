@@ -20,7 +20,7 @@
         "libsqlite3",
         "ImageIO"
       ]
-    },
+    }
   },
   "maintainers": [
     {
