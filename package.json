@@ -1,19 +1,32 @@
 {
   "name": "react-native-sharesdk",
   "version": "1.0.0",
-  "description": "react-native集成share sdk第三方登录，分享。",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lihaodeveloper/React-Native-ShareSdk.git"
+  "author": "Xu Chang",
+  "rnpm": {
+    "ios": {
+      "sharedLibraries": [
+        "libz",
+        "libicucore",
+        "libstdc++",
+        "JavaScriptCore",
+        "libsqlite3",
+        "ImageIO"
+      ]
+    },
   },
+  "maintainers": [
+    {
+      "name": "Xu Chang",
+      "email": "chinawraith@163.com"
+    }
+  ],
+  "main": "index.js",
   "keywords": [
     "react-native",
     "sharesdk",
     "login",
     "share"
   ],
-  "author": "小成童鞋",
-  "license": "ISC",
-  "homepage": "https://github.com/lihaodeveloper/React-Native-ShareSdk#readme"
+  "license": "MIT",
+  "nativePackage": true,
 }
