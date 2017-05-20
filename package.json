@@ -1,25 +1,37 @@
 {
-  "name": "react-native-sharesdk",
-  "version": "1.0.9",
-  "description": "react-native集成share sdk第三方登录，分享。",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lihaodeveloper/React-Native-ShareSdk.git"
-  },
-  "keywords": [
-    "react-native",
-    "sharesdk",
-    "login",
-    "share"
+  "name": "martian-shareSDK",
+  "description": "react native支付宝移动支付模块（码天科技有限公司）",
+  "author": "Xu Chang",
+  "files": [
+    "main.js",
+    "android/*",
+    "ios/*",
+    "scripts/*",
+    "README.md"
   ],
-  "author": "小成童鞋",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/lihaodeveloper/React-Native-ShareSdk/issues"
+  "rnpm": {
+    "ios": {
+      "sharedLibraries": [
+        "libicucore",
+        "libz",
+        "libstdc++",
+        "JavaScriptCore",
+        "libsqlite3",
+        "ImageIO"
+      ]
+    },
   },
-  "homepage": "https://github.com/lihaodeveloper/React-Native-ShareSdk#readme"
+  "maintainers": [
+    {
+      "name": "Xu Chang",
+      "email": "chinawraith@163.com"
+    }
+  ],
+  "keywords": [
+    "react-native-share",
+  ],
+  "license": "MIT",
+  "main": "main.js",
+  "nativePackage": true,
+  "version": "1.0.0"
 }
