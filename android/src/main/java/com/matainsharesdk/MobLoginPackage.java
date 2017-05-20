@@ -1,4 +1,4 @@
-package com.qq.rnsharesdk;
+package com.matainsharesdk;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;

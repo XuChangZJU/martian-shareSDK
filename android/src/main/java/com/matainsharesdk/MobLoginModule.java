@@ -1,4 +1,4 @@
-package com.qq.rnsharesdk;
+package com.matainsharesdk;
 
 import android.content.Context;
 import android.util.Log;
