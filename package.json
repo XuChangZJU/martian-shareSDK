@@ -2,6 +2,11 @@
   "name": "react-native-sharesdk",
   "version": "1.0.0",
   "author": "Xu Chang",
+  "description": "martian-react-native-html-to-pdf（码天科技有限公司）",
+  "repository": {
+    "type": "git",
+    "url": "github:XuChangZJU/martian-shareSDK"
+  },
   "rnpm": {
     "ios": {
       "sharedLibraries": [
