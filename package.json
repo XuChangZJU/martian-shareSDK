@@ -1,12 +1,25 @@
 {
-  "name": "martianShareSDK",
-  "version": "0.0.1",
-  "private": true,
+  "name": "react-native-sharesdk",
+  "version": "1.0.9",
+  "description": "react-native集成share sdk第三方登录，分享。",
+  "main": "index.js",
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "react": "16.0.0-alpha.6",
-    "react-native": "0.44.0"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lihaodeveloper/React-Native-ShareSdk.git"
+  },
+  "keywords": [
+    "react-native",
+    "sharesdk",
+    "login",
+    "share"
+  ],
+  "author": "小成童鞋",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lihaodeveloper/React-Native-ShareSdk/issues"
+  },
+  "homepage": "https://github.com/lihaodeveloper/React-Native-ShareSdk#readme"
 }
