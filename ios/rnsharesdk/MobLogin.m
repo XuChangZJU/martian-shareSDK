@@ -34,8 +34,6 @@ RCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)
         NSString* string;
         NSString* string1 = content;
         NSString* string2 = url;
-        NSArray* imageArray = @[imgUrl];
-        NSLog(@"%@",imageArray);
         string = [string1 stringByAppendingString:string2];
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
         //NSArray* imageArray = @[imgUrl];
