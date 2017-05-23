@@ -18,8 +18,6 @@ import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.onekeyshare.OnekeyShareTheme;
-import cn.sharesdk.tencent.qq.QQ;
-import cn.sharesdk.wechat.friends.Wechat;
 
 /**
  * Created by cc on 2017/1/29.
@@ -46,27 +44,6 @@ public class MobLoginModule extends ReactContextBaseJavaModule implements Platfo
         ShareSDK.initSDK(mContext);
     }
 
-    @ReactMethod
-    public void loginWithQQ(Promise promise) {
-        Platform qq = ShareSDK.getPlatform(QQ.NAME);
-        if(qq.isAuthValid()){
-            qq.removeAccount(true);
-        }
-        qq.setPlatformActionListener(this);
-        qq.showUser(null);
-        mPromise = promise;
-    }
-
-    @ReactMethod
-    public void loginWithWeChat(Promise promise) {
-        Platform wechat = ShareSDK.getPlatform(Wechat.NAME);
-        if(wechat.isAuthValid()){
-            wechat.removeAccount(true);
-        }
-        wechat.setPlatformActionListener(this);
-        wechat.showUser(null);
-        mPromise = promise;
-    }
 
     @ReactMethod
     public void showShare(String title, String text, String url, String imageUrl) {
