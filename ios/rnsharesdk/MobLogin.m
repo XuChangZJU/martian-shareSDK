@@ -22,41 +22,7 @@ RCT_EXPORT_MODULE();
          *  在此事件中写入连接代码。第四个参数则为配置本地社交平台时触发，根据返回的平台类型来配置平台信息。
          *  如果您使用的时服务端托管平台信息时，第二、四项参数可以传入nil，第三项参数则根据服务端托管平台来决定要连接的社交SDK。
          */
-        [ShareSDK registerApp:@"iosv1101"
-              activePlatforms:@[@(SSDKPlatformSubTypeWechatSession), @(SSDKPlatformSubTypeWechatTimeline), @(SSDKPlatformTypeSinaWeibo)]
-                     onImport:^(SSDKPlatformType platformType) {
-                         
-                         switch (platformType)
-                         {
-                             case SSDKPlatformTypeWechat:
-                                 [ShareSDKConnector connectWeChat:[WXApi class]];
-                                 break;
-                             case SSDKPlatformTypeSinaWeibo:
-                                 [ShareSDKConnector connectWeibo:[WeiboSDK class]];
-                                 break;
-                             default:
-                                 break;
-                         }
-                     }
-              onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo) {
-                  
-                  switch (platformType)
-                  {
-                      case SSDKPlatformTypeWechat:
-                          [appInfo SSDKSetupWeChatByAppId:@"wx4868b35061f87885"
-                                                appSecret:@"64020361b8ec4c99936c0e3999a9f249"];
-                          break;
-                      case SSDKPlatformTypeSinaWeibo:
-                          //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
-                          [appInfo SSDKSetupSinaWeiboByAppKey:@"568898243"
-                                                    appSecret:@"38a4f8204cc784f81f9f0daaf31e02e3"
-                                                  redirectUri:@"http://www.sharesdk.cn"
-                                                     authType:SSDKAuthTypeBoth];
-                          break;
-                      default:
-                          break;
-                  }
-              }];
+        
     }
     return self;
 }
