@@ -9,8 +9,8 @@
 
 @implementation MobLogin
 
-RCT_EXPORT_MODULE();
 
+RCT_EXPORT_MODULE();
 - (instancetype)init
 {
     if(self = [super init]){
@@ -27,94 +27,87 @@ RCT_EXPORT_MODULE();
     return self;
 }
 
-RCT_EXPORT_METHOD(loginWithQQ:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if([ShareSDK hasAuthorized:(SSDKPlatformTypeQQ)]){
-            [ShareSDK cancelAuthorize:(SSDKPlatformTypeQQ)];
-        }else{
-            [ShareSDK getUserInfo:SSDKPlatformTypeQQ
-                   onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
-             {
-                 if (state == SSDKResponseStateSuccess){
-                     NSString * const genderStatusName[]={
-                         [SSDKGenderMale] = @"m",
-                         [SSDKGenderFemale] = @"f",
-                         [SSDKGenderUnknown] = @"u",
-                     };
-                     NSMutableDictionary *result = [NSMutableDictionary dictionary];
-                     [result setObject:user.credential.token forKey:@"token"];
-                     [result setObject:user.uid forKey:@"user_id"];
-                     [result setObject:user.nickname forKey:@"user_name"];
-                     [result setObject:genderStatusName[user.gender] forKey:@"user_gender"];
-                     [result setObject:user.icon forKey:@"icon"];
-                     resolve(result);
-                 }else{
-                     reject(@"loginWithQQ: ", error, nil);
-                 }
-             }];
-        }
-    });
-}
-
-RCT_EXPORT_METHOD(loginWithWeChat:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if([ShareSDK hasAuthorized:(SSDKPlatformTypeWechat)]){
-            [ShareSDK cancelAuthorize:(SSDKPlatformTypeWechat)];
-        }else{
-            [ShareSDK getUserInfo:SSDKPlatformTypeWechat
-                   onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
-             {
-                 if (state == SSDKResponseStateSuccess){
-                     NSString * const genderStatusName[]={
-                         [SSDKGenderMale] = @"m",
-                         [SSDKGenderFemale] = @"f",
-                         [SSDKGenderUnknown] = @"u",
-                     };
-                     NSMutableDictionary *result = [NSMutableDictionary dictionary];
-                     [result setObject:user.credential.token forKey:@"token"];
-                     [result setObject:user.uid forKey:@"user_id"];
-                     [result setObject:user.nickname forKey:@"user_name"];
-                     [result setObject:genderStatusName[user.gender] forKey:@"user_gender"];
-                     [result setObject:user.icon forKey:@"icon"];
-                     resolve(result);
-                 }else{
-                     reject(@"loginWithWeChat: ", error, nil);
-                 }
-             }];
-        }
-    });
-}
 
 RCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)url :(NSString *)imgUrl) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        //1、创建分享参数（必要）
-        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+        
+        NSString* string;
+        NSString* string1 = content;
+        NSString* string2 = url;
         NSArray* imageArray = @[imgUrl];
-        [shareParams SSDKSetupShareParamsByText:content
-                                         images:imageArray
+        NSLog(@"%@",imageArray);
+        string = [string1 stringByAppendingString:string2];
+        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+        //NSArray* imageArray = @[imgUrl];
+        [shareParams SSDKSetupShareParamsByText:string
+                                         images:[NSURL URLWithString:imgUrl]
                                             url:[NSURL URLWithString:url]
                                           title:title
                                            type:SSDKContentTypeAuto];
-        //2、分享（可以弹出我们的分享菜单和编辑界面）
-        [ShareSDK showShareActionSheet:nil //要显示菜单的视图, iPad版中此参数作为弹出菜单的参照视图，只有传这个才可以弹出我们的分享菜单，可以传分享的按钮对象或者自己创建小的view 对象，iPhone可以传nil不会影响
-                                 items:nil
-                           shareParams:shareParams
-                   onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
-                       
-                       switch (state) {
-                           case SSDKResponseStateSuccess:
-                           {
-                               break;
-                           }
-                           case SSDKResponseStateFail:
-                           {
-                               break;
-                           }
-                           default:
-                               break;
-                       }
-                   }
-         ];
+        //优先使用平台客户端分享
+        [shareParams SSDKEnableUseClientShare];
+        //设置微博使用高级接口
+        //2017年6月30日后需申请高级权限
+        [shareParams SSDKEnableAdvancedInterfaceShare];
+        //设置显示平台 只能分享视频的YouTube MeiPai 不显示
+        NSArray *items = @[
+                           @(SSDKPlatformTypeWechat),
+                           @(SSDKPlatformTypeSinaWeibo)
+                           ];
+        
+        SSUIShareActionSheetController *sheet = [ShareSDK showShareActionSheet:nil
+                                                                         items:items
+                                                                   shareParams:shareParams
+                                                           onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+                                                               
+                                                               switch (state) {
+                                                                       
+                                                                   case SSDKResponseStateBegin:
+                                                                   {
+                                                                       //设置UI等操作
+                                                                       break;
+                                                                   }
+                                                                   case SSDKResponseStateSuccess:
+                                                                   {
+                                                                       //Instagram、Line等平台捕获不到分享成功或失败的状态，最合适的方式就是对这些平台区别对待
+                                                                       if (platformType == SSDKPlatformTypeInstagram)
+                                                                       {
+                                                                           break;
+                                                                       }
+                                                                       
+                                                                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                                                                                                           message:nil
+                                                                                                                          delegate:nil
+                                                                                                                 cancelButtonTitle:@"确定"
+                                                                                                                 otherButtonTitles:nil];
+                                                                       [alertView show];
+                                                                       break;
+                                                                   }
+                                                                   case SSDKResponseStateFail:
+                                                                   {
+                                                                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                                                                       message:[NSString stringWithFormat:@"%@",error]
+                                                                                                                      delegate:nil
+                                                                                                             cancelButtonTitle:@"OK"
+                                                                                                             otherButtonTitles:nil, nil];
+                                                                       [alert show];
+                                                                       break;
+                                                                   }
+                                                                   case SSDKResponseStateCancel:
+                                                                   {
+                                                                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享已取消"
+                                                                                                                           message:nil
+                                                                                                                          delegate:nil
+                                                                                                                 cancelButtonTitle:@"确定"
+                                                                                                                 otherButtonTitles:nil];
+                                                                       [alertView show];
+                                                                       break;
+                                                                   }
+                                                                   default:
+                                                                       break;
+                                                               }
+                                                           }];
+        [sheet.directSharePlatforms addObject:@(SSDKPlatformTypeSinaWeibo)];
     });
 }
 

@@ -34,7 +34,7 @@
 
 /* Begin PBXFileReference section */
 		4270F5C81E420DC6005825DB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		42975DC81E40F8B9009908A9 /* librnsharesdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = librnsharesdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		42975DC81E40F8B9009908A9 /* libRNSharesdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNSharesdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		42A0D3D11E41CB26000B08E6 /* MobLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobLogin.m; sourceTree = "<group>"; };
 		42A0D3D31E41CDF6000B08E6 /* MobLogin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobLogin.h; sourceTree = "<group>"; };
 		42A0D3EA1E41D8B7000B08E6 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -111,7 +111,7 @@
 		42975DC91E40F8B9009908A9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				42975DC81E40F8B9009908A9 /* librnsharesdk.a */,
+				42975DC81E40F8B9009908A9 /* libRNSharesdk.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -223,9 +223,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		42975DC71E40F8B9009908A9 /* rnsharesdk */ = {
+		42975DC71E40F8B9009908A9 /* RNSharesdk */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 42975DD11E40F8B9009908A9 /* Build configuration list for PBXNativeTarget "rnsharesdk" */;
+			buildConfigurationList = 42975DD11E40F8B9009908A9 /* Build configuration list for PBXNativeTarget "RNSharesdk" */;
 			buildPhases = (
 				42975DC41E40F8B9009908A9 /* Sources */,
 				42975DC51E40F8B9009908A9 /* Frameworks */,
@@ -235,9 +235,9 @@
 			);
 			dependencies = (
 			);
-			name = rnsharesdk;
+			name = RNSharesdk;
 			productName = rnsharesdk;
-			productReference = 42975DC81E40F8B9009908A9 /* librnsharesdk.a */;
+			productReference = 42975DC81E40F8B9009908A9 /* libRNSharesdk.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -266,7 +266,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				42975DC71E40F8B9009908A9 /* rnsharesdk */,
+				42975DC71E40F8B9009908A9 /* RNSharesdk */,
 			);
 		};
 /* End PBXProject section */
@@ -448,7 +448,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		42975DD11E40F8B9009908A9 /* Build configuration list for PBXNativeTarget "rnsharesdk" */ = {
+		42975DD11E40F8B9009908A9 /* Build configuration list for PBXNativeTarget "RNSharesdk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				42975DD21E40F8B9009908A9 /* Debug */,
