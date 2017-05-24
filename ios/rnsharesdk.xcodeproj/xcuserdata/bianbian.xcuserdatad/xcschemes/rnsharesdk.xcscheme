@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "42975DC71E40F8B9009908A9"
-               BuildableName = "libRNSharesdk.a"
-               BlueprintName = "RNSharesdk"
-               ReferencedContainer = "container:RNSharesdk.xcodeproj">
+               BuildableName = "librnsharesdk.a"
+               BlueprintName = "rnsharesdk"
+               ReferencedContainer = "container:rnsharesdk.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "42975DC71E40F8B9009908A9"
-            BuildableName = "libRNSharesdk.a"
-            BlueprintName = "RNSharesdk"
-            ReferencedContainer = "container:RNSharesdk.xcodeproj">
+            BuildableName = "librnsharesdk.a"
+            BlueprintName = "rnsharesdk"
+            ReferencedContainer = "container:rnsharesdk.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "42975DC71E40F8B9009908A9"
-            BuildableName = "libRNSharesdk.a"
-            BlueprintName = "RNSharesdk"
-            ReferencedContainer = "container:RNSharesdk.xcodeproj">
+            BuildableName = "librnsharesdk.a"
+            BlueprintName = "rnsharesdk"
+            ReferencedContainer = "container:rnsharesdk.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
