@@ -18,10 +18,9 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" >
             <meta-data android:name="AuthorizeAdapter" android:value="cn.sharesdk.demo.MyAdapter" />
+            <!-- 调用新浪原生SDK，需要注册的回调activity -->
             <intent-filter>
-                <data android:scheme="tencent${QQ_APP_ID}" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
