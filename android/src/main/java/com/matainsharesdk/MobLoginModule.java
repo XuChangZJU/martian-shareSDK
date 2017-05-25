@@ -46,7 +46,7 @@ public class MobLoginModule extends ReactContextBaseJavaModule implements Platfo
 
 
     @ReactMethod
-    public void showShare(String title, String text, String url, String imageUrl) {
+    public void showShare(String title, String text, String url, String imageUrl, final Promise promise) {
 
         OnekeyShare oks = new OnekeyShare();
         oks.setSilent(true);
@@ -67,26 +67,29 @@ public class MobLoginModule extends ReactContextBaseJavaModule implements Platfo
         oks.setLatitude(23.169f);
         oks.setLongitude(112.908f);
         // 启动分享GUI
+        oks.setCallback(this);
         oks.show(mContext);
+        mPromise = promise;
     }
 
     @Override
     public void onComplete(Platform platform, int action, HashMap<String, Object> hashMap) {
-        if (action == Platform.ACTION_USER_INFOR) {
-            PlatformDb platDB = platform.getDb();
-            WritableMap map = Arguments.createMap();
-            map.putString("token", platDB.getToken());
-            map.putString("user_id", platDB.getUserId());
-            map.putString("user_name", platDB.getUserName());
-            map.putString("user_gender", platDB.getUserGender());
-            map.putString("user_icon", platDB.getUserIcon());
-            mPromise.resolve(map);
-        }
+           WritableMap params = Arguments.createMap();
+            params.putInt("type", ShareSDK.platformNameToId(platform.getName()));
+            params.putInt("platformName", platform.getName());
+            params.putInt("action", action);
+            params.putString("MSG","成功");
+            mPromise.resolve(params);
     }
 
     @Override
-    public void onError(Platform platform, int i, Throwable throwable) {
-        mPromise.reject("LoginError", throwable.getMessage());
+    public void onError(Platform platform, int action, Throwable throwable) {
+            WritableMap params = Arguments.createMap();
+            params.putInt("type", ShareSDK.platformNameToId(platform.getName()));
+            params.putInt("platformName", platform.getName());
+            params.putInt("action", action);
+            params.putString("MSG","失败");
+            mPromise.reject(params);
     }
 
     @Override

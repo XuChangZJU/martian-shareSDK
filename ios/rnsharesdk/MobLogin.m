@@ -6,6 +6,8 @@
 //  Copyright © 2017年 qq. All rights reserved.
 //
 #import "MobLogin.h"
+static RCTPromiseResolveBlock _resolve;
+static RCTPromiseRejectBlock _reject;
 
 @implementation MobLogin
 
@@ -28,7 +30,11 @@ RCT_EXPORT_MODULE();
 }
 
 
-RCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)url :(NSString *)imgUrl) {
+RCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)url :(NSString *)imgUrl resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject) {
+    
+    _resolve = resolve;
+    _reject = reject;
     dispatch_async(dispatch_get_main_queue(), ^{
         
         NSString* string;
@@ -41,8 +47,7 @@ RCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)
                                          images:[NSURL URLWithString:imgUrl]
                                             url:[NSURL URLWithString:url]
                                           title:title
-                                           type:SSDKContentTypeAuto];
-        //优先使用平台客户端分享
+                                           type:SSDKContentTypeAuto];        //优先使用平台客户端分享
         [shareParams SSDKEnableUseClientShare];
         //设置微博使用高级接口
         //2017年6月30日后需申请高级权限
@@ -57,7 +62,6 @@ RCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)
                                                                          items:items
                                                                    shareParams:shareParams
                                                            onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
-                                                               
                                                                switch (state) {
                                                                        
                                                                    case SSDKResponseStateBegin:
@@ -67,38 +71,20 @@ RCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)
                                                                    }
                                                                    case SSDKResponseStateSuccess:
                                                                    {
+                                                                       NSDictionary *dic = @{@"type": [NSNumber numberWithInteger: platformType] };
+                                                                       [MobLogin shareResult:dic];
                                                                        //Instagram、Line等平台捕获不到分享成功或失败的状态，最合适的方式就是对这些平台区别对待
-                                                                       if (platformType == SSDKPlatformTypeInstagram)
-                                                                       {
-                                                                           break;
-                                                                       }
-                                                                       
-                                                                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
-                                                                                                                           message:nil
-                                                                                                                          delegate:nil
-                                                                                                                 cancelButtonTitle:@"确定"
-                                                                                                                 otherButtonTitles:nil];
-                                                                       [alertView show];
                                                                        break;
                                                                    }
                                                                    case SSDKResponseStateFail:
                                                                    {
-                                                                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
-                                                                                                                       message:[NSString stringWithFormat:@"%@",error]
-                                                                                                                      delegate:nil
-                                                                                                             cancelButtonTitle:@"OK"
-                                                                                                             otherButtonTitles:nil, nil];
-                                                                       [alert show];
-                                                                       break;
+                                                                       ;
+                                                                       NSDictionary *dic = @{@"type": [NSNumber numberWithInteger: platformType] };
+                                                                       [MobLogin shareResultFailed:dic];                                                            break;
                                                                    }
                                                                    case SSDKResponseStateCancel:
                                                                    {
-                                                                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享已取消"
-                                                                                                                           message:nil
-                                                                                                                          delegate:nil
-                                                                                                                 cancelButtonTitle:@"确定"
-                                                                                                                 otherButtonTitles:nil];
-                                                                       [alertView show];
+                                                                       
                                                                        break;
                                                                    }
                                                                    default:
@@ -107,6 +93,15 @@ RCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)
                                                            }];
         [sheet.directSharePlatforms addObject:@(SSDKPlatformTypeSinaWeibo)];
     });
+}
+
++ (void)shareResult:(NSDictionary *)result
+{
+    _resolve(result);
+}
++ (void)shareResultFailed:(NSDictionary *)result
+{
+    
 }
 
 @end
