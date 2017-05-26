@@ -8,6 +8,7 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import android.widget.Toast;
 import com.facebook.react.bridge.WritableMap;
 
 import java.util.HashMap;
@@ -22,8 +23,31 @@ import cn.sharesdk.onekeyshare.OnekeyShareTheme;
 /**
  * Created by cc on 2017/1/29.
  */
+class Foo implements PlatformActionListener {
 
-public class MobLoginModule extends ReactContextBaseJavaModule implements PlatformActionListener {
+    void foo() {
+    }
+     @Override
+     public void onComplete(Platform platform, int action, HashMap<String, Object> hashMap ) {
+                       WritableMap params = Arguments.createMap();
+                        params.putInt("type", ShareSDK.platformNameToId(platform.getName()));
+                        params.putString("platformName", platform.getName());
+                        params.putInt("action", action);
+                        params.putString("MSG","成功");
+                        foo();
+                        promise.resol
+     }
+
+                @Override
+                public void onError(Platform platform, int action, Throwable throwable) {
+                }
+
+                @Override
+                public void onCancel(Platform platform, int i) {
+                }
+}
+
+public class MobLoginModule extends ReactContextBaseJavaModule {
     private Context mContext;
     private Promise mPromise;
 
@@ -47,7 +71,6 @@ public class MobLoginModule extends ReactContextBaseJavaModule implements Platfo
 
     @ReactMethod
     public void showShare(String title, String text, String url, String imageUrl, final Promise promise) {
-
         OnekeyShare oks = new OnekeyShare();
         oks.setSilent(true);
     oks.setTheme(OnekeyShareTheme.CLASSIC);
@@ -64,36 +87,30 @@ public class MobLoginModule extends ReactContextBaseJavaModule implements Platfo
         oks.setSite("ShareSDK");  //QZone分享完之后返回应用时提示框上显示的名称
         oks.setVenueName("ShareSDK");
         oks.setVenueDescription("This is a beautiful place!");
-        oks.setLatitude(23.169f);
-        oks.setLongitude(112.908f);
-        // 启动分享GUI
-        oks.setCallback(this);
-        oks.show(mContext);
-        mPromise = promise;
-    }
+           // 启动分享GUI
+           oks.setCallback(new PlatformActionListener ()
+           {
+             @Override
+               public void onComplete(Platform platform, int action, HashMap<String, Object> hashMap ) {
+                       Toast.makeText(mContext, platform.getName(), Toast.LENGTH_SHORT).show();
+                      WritableMap params = Arguments.createMap();
+                       params.putInt("type", ShareSDK.platformNameToId(platform.getName()));
+                       params.putString("platformName", platform.getName());
+                       params.putInt("action", action);
+                       params.putString("MSG","成功");
+                       promise.resolve(params);
+               }
 
-    @Override
-    public void onComplete(Platform platform, int action, HashMap<String, Object> hashMap) {
-           WritableMap params = Arguments.createMap();
-            params.putInt("type", ShareSDK.platformNameToId(platform.getName()));
-            params.putInt("platformName", platform.getName());
-            params.putInt("action", action);
-            params.putString("MSG","成功");
-            mPromise.resolve(params);
-    }
+               @Override
+               public void onError(Platform platform, int action, Throwable throwable) {
+   Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show();
+               }
 
-    @Override
-    public void onError(Platform platform, int action, Throwable throwable) {
-            WritableMap params = Arguments.createMap();
-            params.putInt("type", ShareSDK.platformNameToId(platform.getName()));
-            params.putInt("platformName", platform.getName());
-            params.putInt("action", action);
-            params.putString("MSG","失败");
-            mPromise.reject(params);
-    }
-
-    @Override
-    public void onCancel(Platform platform, int i) {
-
-    }
-}
+               @Override
+               public void onCancel(Platform platform, int i) {
+   Toast.makeText(mContext, "取消", Toast.LENGTH_SHORT).show();
+               }
+           }
+           );
+           oks.show(mContext);
+       }
