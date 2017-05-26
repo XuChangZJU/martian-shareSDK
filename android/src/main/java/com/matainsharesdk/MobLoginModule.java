@@ -23,29 +23,6 @@ import cn.sharesdk.onekeyshare.OnekeyShareTheme;
 /**
  * Created by cc on 2017/1/29.
  */
-class Foo implements PlatformActionListener {
-
-    void foo() {
-    }
-     @Override
-     public void onComplete(Platform platform, int action, HashMap<String, Object> hashMap ) {
-                       WritableMap params = Arguments.createMap();
-                        params.putInt("type", ShareSDK.platformNameToId(platform.getName()));
-                        params.putString("platformName", platform.getName());
-                        params.putInt("action", action);
-                        params.putString("MSG","成功");
-                        foo();
-                        promise.resol
-     }
-
-                @Override
-                public void onError(Platform platform, int action, Throwable throwable) {
-                }
-
-                @Override
-                public void onCancel(Platform platform, int i) {
-                }
-}
 
 public class MobLoginModule extends ReactContextBaseJavaModule {
     private Context mContext;
