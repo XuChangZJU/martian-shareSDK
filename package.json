@@ -1,14 +1,73 @@
 {
-  "name": "martian-shareSDK",
-  "version": "1.0.0",
-  "author": "Xu Chang",
-  "scripts": {
-    "start": "node_modules/react-native/packager/packager.sh"
+  "_args": [
+    [
+      "martian-shareSDK@github:xuchangzju/martian-shareSDK#dev",
+      "/Users/ecloud_mbp/Apps/URent"
+    ]
+  ],
+  "_from": "xuchangzju/martian-shareSDK#dev",
+  "_id": "martian-shareSDK@1.0.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/martian-shareSDK",
+  "_phantomChildren": {},
+  "_requested": {
+    "hosted": {
+      "directUrl": "https://raw.githubusercontent.com/xuchangzju/martian-shareSDK/dev/package.json",
+      "gitUrl": "git://github.com/xuchangzju/martian-shareSDK.git#dev",
+      "httpsUrl": "git+https://github.com/xuchangzju/martian-shareSDK.git#dev",
+      "shortcut": "github:xuchangzju/martian-shareSDK#dev",
+      "ssh": "git@github.com:xuchangzju/martian-shareSDK.git#dev",
+      "sshUrl": "git+ssh://git@github.com/xuchangzju/martian-shareSDK.git#dev",
+      "type": "github"
+    },
+    "name": "martian-shareSDK",
+    "raw": "martian-shareSDK@github:xuchangzju/martian-shareSDK#dev",
+    "rawSpec": "github:xuchangzju/martian-shareSDK#dev",
+    "scope": null,
+    "spec": "github:xuchangzju/martian-shareSDK#dev",
+    "type": "hosted"
   },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git://github.com/xuchangzju/martian-shareSDK.git#0b924911fce4911ba0e4dfb38843f2d676b4b5e3",
+  "_shasum": "316c0e64cf8230052e490a08369cdfc17440875b",
+  "_shrinkwrap": null,
+  "_spec": "martian-shareSDK@github:xuchangzju/martian-shareSDK#dev",
+  "_where": "/Users/ecloud_mbp/Apps/URent",
+  "author": {
+    "name": "Xu Chang"
+  },
+  "bugs": {
+    "url": "https://github.com/xuchangzju/martian-shareSDK/issues"
+  },
+  "dependencies": {},
   "description": "martian-shareSDK（码天科技有限公司）",
+  "devDependencies": {},
+  "gitHead": "0b924911fce4911ba0e4dfb38843f2d676b4b5e3",
+  "homepage": "https://github.com/xuchangzju/martian-shareSDK#readme",
+  "keywords": [
+    "react-native",
+    "sharesdk",
+    "login",
+    "share"
+  ],
+  "license": "MIT",
+  "main": "main.js",
+  "maintainers": [
+    {
+      "email": "chinawraith@163.com",
+      "name": "Xu Chang"
+    }
+  ],
+  "name": "martian-shareSDK",
+  "optionalDependencies": {},
+  "readme": "\n\n# 码天科技 5月23 日 创作 matian-sharesdk\nshare sdk for react-native\n集成了 微信，朋友圈，以及新浪微博 3大最主流的 ios 以及android 端的 分享功能\n\n## install\n 在package.json 加入 \"martian-shareSDK\": \"XuChangZJU/martian-shareSDK#dev\",\n\n`npm i martian-shareSDK`\n\n## link\n\n`react-native link`\n\n### IOS\n\n\n 1. 打开Xcode app项目文件夹, 找到路径为`node_modules/react-native-sharesdk/ios/rnsharesdk/ShareSDK`的目录\n    并且拖动到`Libraries`目录,不要勾选`copy items if needed`。\n\n 2. 在项目中找到`Build Settings`这一栏, 继续往下找到`Framework Search Paths`这一节，加入以下这些路径值：\n    `$(SRCROOT)/../node_modules/react-native-sharesdk/ios/rnsharesdk/ShareSDK`,\n    `$(SRCROOT)/../node_modules/react-native-sharesdk/ios/rnsharesdk/ShareSDK/Support/Optional`,\n    `$(SRCROOT)/../node_modules/react-native-sharesdk/ios/rnsharesdk/ShareSDK/Support/PlatformConnector`,\n    `$(SRCROOT)/../node_modules/react-native-sharesdk/ios/rnsharesdk/ShareSDK/Support/Required`,\n    继续找到`Library Search Paths`这一节，加入以下这些路径值：\n    `$(SRCROOT)/../node_modules/react-native-sharesdk/ios/rnsharesdk/ShareSDK/Support/PlatformSDK/WeChatSDK`,\n    `$(SRCROOT)/../node_modules/react-native-sharesdk/ios/rnsharesdk/ShareSDK/Support/PlatformSDK/SinaWeiboSDK`,\n\n 3.在项目中找到`Build Phases`这一栏, 继续往下找到`Link Binary With Libraries`这一节，加入以下这些库：\n   `码天已帮您link 所有库 这里可以跳过`\n   具体依赖如下图\n   ![tbdimg](https://github.com/lihaodeveloper/React-Native-ShareSdk/blob/master/asset/tbdimg.png)\n\n 4.在项目中找到`Info`这一栏, 往下找到`App Transport Security Settings`这一栏，添加新的一行`Allow Arbitrary Loads`，设置为`YES`\n   ![arbitrary](https://github.com/lihaodeveloper/React-Native-ShareSdk/blob/master/asset/arbitrary.png)\n   继续往下找到`URL Types`这一节，点击`+`号添加一栏数据，填入weibo appid,微信app key\n   例如:`weibo100371282`, 100371282 是weibo appid.\n   ![urltype](https://github.com/lihaodeveloper/React-Native-ShareSdk/blob/master/asset/urltype.png)\n   在`URL Types`中添加WEIBO的AppID，其格式为：”weibo” ＋ AppId的16进制（如果appId转换的16进制数不够8位则在前面补0，如转换的是：5FB8B52，\n   则最终填入为：QQ05FB8B52 注意：转换后的字母要大写） 转换16进制的方法：echo ‘ibase=10;obase=16;801312852′|bc，其中801312852为QQ的AppID\n   码天 温馨提示 这里一定要去参考\n   ![urltype16](http://wiki.mob.com/wp-content/uploads/2015/09/9406F13D-F78B-4261-A52B-CFBC7ECF4890.png)\n\n   ### 具体细节可参考：[ios简洁版快速集成](http://wiki.mob.com/ios简洁版快速集成/) \n\n\n 5.在项目中找到`Info`这一栏, 添加 `LSApplicationQueriesSchemes` 设置类型 `Array`.\n\n   ![aqs](https://github.com/lihaodeveloper/React-Native-ShareSdk/blob/master/asset/aqs.png)\n\n   ![lsqschemesimg](https://github.com/lihaodeveloper/React-Native-ShareSdk/blob/master/asset/lsqschemes.png)\n   \n   ### 具体细节可参考： [ios9-对sharesdk的影响](http://wiki.mob.com/ios9-对sharesdk的影响（适配ios-9必读）/) \n   \n 6.添加你的 sharesdk appkey, qq appid 和 appkey 在 `node_modules/react-native-sharesdk/ios/rnsharesdk/MobLogin.m`\n   ```objectiv-c\n      [ShareSDK registerApp:@\"iosv1101\"\n   ```\n\n   ```objectiv-c\nRCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)url :(NSString *)imgUrl) {\n    dispatch_async(dispatch_get_main_queue(), ^{\n        \n        NSString* string;\n        NSString* string1 = content;\n        NSString* string2 = url;\n        string = [string1 stringByAppendingString:string2];\n        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];\n        //NSArray* imageArray = @[imgUrl];\n        [shareParams SSDKSetupShareParamsByText:string\n                                         images:[NSURL URLWithString:imgUrl]\n                                            url:[NSURL URLWithString:url]\n                                          title:title\n                                           type:SSDKContentTypeAuto];        //优先使用平台客户端分享\n        [shareParams SSDKEnableUseClientShare];\n        //设置微博使用高级接口\n        //2017年6月30日后需申请高级权限\n        [shareParams SSDKEnableAdvancedInterfaceShare];\n        //设置显示平台 只能分享视频的YouTube MeiPai 不显示\n        NSArray *items = @[\n                           @(SSDKPlatformTypeWechat),\n                           @(SSDKPlatformTypeSinaWeibo)\n                           ];\n        \n        SSUIShareActionSheetController *sheet = [ShareSDK showShareActionSheet:nil\n                                                                         items:items\n                                                                   shareParams:shareParams\n                                                           onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {\n                                                               \n                                                               switch (state) {\n                                                                       \n                                                                   case SSDKResponseStateBegin:\n                                                                   {\n                                                                       //设置UI等操作\n                                                                       break;\n                                                                   }\n                                                                   case SSDKResponseStateSuccess:\n                                                                   {\n                                                                       //Instagram、Line等平台捕获不到分享成功或失败的状态，最合适的方式就是对这些平台区别对待\n                                                                       if (platformType == SSDKPlatformTypeInstagram)\n                                                                       {\n                                                                           break;\n                                                                       }\n                                                                       \n                                                                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@\"分享成功\"\n                                                                                                                           message:nil\n                                                                                                                          delegate:nil\n                                                                                                                 cancelButtonTitle:@\"确定\"\n                                                                                                                 otherButtonTitles:nil];\n                                                                       [alertView show];\n                                                                       break;\n                                                                   }\n                                                                   case SSDKResponseStateFail:\n                                                                   {\n                                                                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@\"分享失败\"\n                                                                                                                       message:[NSString stringWithFormat:@\"%@\",error]\n                                                                                                                      delegate:nil\n                                                                                                             cancelButtonTitle:@\"OK\"\n                                                                                                             otherButtonTitles:nil, nil];\n                                                                       [alert show];\n                                                                       break;\n                                                                   }\n                                                                   case SSDKResponseStateCancel:\n                                                                   {\n                                                                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@\"分享已取消\"\n                                                                                                                           message:nil\n                                                                                                                          delegate:nil\n                                                                                                                 cancelButtonTitle:@\"确定\"\n                                                                                                                 otherButtonTitles:nil];\n                                                                       [alertView show];\n                                                                       break;\n                                                                   }\n                                                                   default:\n                                                                       break;\n                                                               }\n                                                           }];\n        [sheet.directSharePlatforms addObject:@(SSDKPlatformTypeSinaWeibo)];\n    });\n}\n   ```\n\n\n### ANDROID\n\n **qq 微信登录 分享**\n\n1. 添加你的 qq AppId 在 `node_modules/react-native-sharesdk/android/build.gradle`\n\n  ```xml\n  defaultConfig {\n        ...\n        manifestPlaceholders = [\n                QQ_APP_ID: \"100371282\", //qq AppId\n        ]\n    }\n  ```\n\n2. 添加你的 qq sharesdk appkey 在 `node_modules/react-native-sharesdk/android/src/main/assets/ShareSDK.xml`\n\n  ```xml\n  <ShareSDK\n        AppKey = \"androidv1101\"/> <!-- 修改成你在sharesdk后台注册的应用的appkey\"-->\n  ```\n\n3. 添加你的 qq appid 和 appkey 在 `node_modules/react-native-sharesdk/android/src/main/assets/ShareSDK.xml`\n\n  ```xml\n  <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->\n\t<QQ\n        Id=\"7\"\n        SortId=\"7\"\n        AppId=\"100371282\"\n        AppKey=\"aed9b0303e3ed1e27bae87c33761161d\"\n        ShareByAppClient=\"true\"\n        Enable=\"true\" />\n  ```\n\n## usage\n\n```\n...\nimport { NativeModules } from 'react-native'\nconst {MobLogin} = NativeModules\n\n...\n\n  _onPressShare() {\n    MobLogin.showShare('我是标题', '分享什么内容')\n  }\n\nrender() {\n    return (\n      <View style={styles.container}>\n        <TouchableOpacity style={styles.qqlogin} onPress={()=>this._onPressLogin()}>\n          <Text style={{fontSize: 18, color: 'black'}}>QQLogin</Text>\n        </TouchableOpacity>\n        ....\n      </View>\n    )\n}\n",
+  "readmeFilename": "README.md",
   "repository": {
     "type": "git",
-    "url": "github:XuChangZJU/martian-shareSDK"
+    "url": "git+https://github.com/xuchangzju/martian-shareSDK.git"
   },
   "rnpm": {
     "ios": {
@@ -22,18 +81,8 @@
       ]
     }
   },
-  "maintainers": [
-    {
-      "name": "Xu Chang",
-      "email": "chinawraith@163.com"
-    }
-  ],
-  "main": "index.js",
-  "keywords": [
-    "react-native",
-    "sharesdk",
-    "login",
-    "share"
-  ],
-  "license": "MIT"
+  "scripts": {
+    "start": "node_modules/react-native/packager/packager.sh"
+  },
+  "version": "1.0.0"
 }
