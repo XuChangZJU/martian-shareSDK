@@ -62,6 +62,20 @@ RCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)
                                                                          items:items
                                                                    shareParams:shareParams
                                                            onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+                                                               NSString * TEMP;
+                                                               if ([NSNumber numberWithInteger: platformType] == [NSNumber numberWithInteger: 1]) {
+                                                                   TEMP = @"Sina";
+                                                               }
+                                                               else if ([NSNumber numberWithInteger: platformType] == [NSNumber numberWithInteger: 37]) {
+                                                                   TEMP = @"WechatFav";
+                                                               }
+                                                               else if([NSNumber numberWithInteger: platformType] == [NSNumber numberWithInteger: 22]) {
+                                                                   TEMP = @"Wechat";
+                                                               }
+                                                               
+                                                      else if          ([NSNumber numberWithInteger: platformType] == [NSNumber numberWithInteger: 23]) {
+                                                                   TEMP = @"WechatTimeline";
+                                                               }
                                                                switch (state) {
                                                                        
                                                                    case SSDKResponseStateBegin:
@@ -71,7 +85,7 @@ RCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)
                                                                    }
                                                                    case SSDKResponseStateSuccess:
                                                                    {
-                                                                       NSDictionary *dic = @{@"type": [NSNumber numberWithInteger: platformType] };
+                                                                       NSDictionary *dic = @{@"type": TEMP};
                                                                        [MobLogin shareResult:dic];
                                                                        //Instagram、Line等平台捕获不到分享成功或失败的状态，最合适的方式就是对这些平台区别对待
                                                                        break;
