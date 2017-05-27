@@ -50,7 +50,7 @@ public class MobLoginModule extends ReactContextBaseJavaModule {
     public void showShare(String title, String text, String url, String imageUrl, final Promise promise) {
         OnekeyShare oks = new OnekeyShare();
         oks.setSilent(true);
-    oks.setTheme(OnekeyShareTheme.CLASSIC);
+        oks.setTheme(OnekeyShareTheme.CLASSIC);
         // 令编辑页面显示为Dialog模式
         oks.setDialogMode();
         // 在自动授权时可以禁用SSO方式
@@ -65,30 +65,28 @@ public class MobLoginModule extends ReactContextBaseJavaModule {
         oks.setVenueName("ShareSDK");
         oks.setVenueDescription("This is a beautiful place!");
            // 启动分享GUI
-           oks.setCallback(new PlatformActionListener ()
-           {
-             @Override
-               public void onComplete(Platform platform, int action, HashMap<String, Object> hashMap ) {
-                       Toast.makeText(mContext, platform.getName(), Toast.LENGTH_SHORT).show();
-                      WritableMap params = Arguments.createMap();
-                       params.putInt("type", ShareSDK.platformNameToId(platform.getName()));
-                       params.putString("platformName", platform.getName());
-                       params.putInt("action", action);
-                       params.putString("MSG","成功");
-                       promise.resolve(params);
-               }
+        oks.setCallback(new PlatformActionListener (){
+            @Override
+            public void onComplete(Platform platform, int action, HashMap<String, Object> hashMap ) {
+                Toast.makeText(mContext, "分享成功", Toast.LENGTH_SHORT).show();
+                WritableMap params = Arguments.createMap();
+                params.putInt("type", ShareSDK.platformNameToId(platform.getName()));
+                params.putString("platformName", platform.getName());
+                params.putInt("action", action);
+                params.putString("MSG","成功");
+                promise.resolve(params);
+            }
 
-               @Override
-               public void onError(Platform platform, int action, Throwable throwable) {
-   Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show();
-               }
+            @Override
+            public void onError(Platform platform, int action, Throwable throwable) {
+                Toast.makeText(mContext, "分享失败", Toast.LENGTH_SHORT).show();
+            }
 
-               @Override
-               public void onCancel(Platform platform, int i) {
-   Toast.makeText(mContext, "取消", Toast.LENGTH_SHORT).show();
-               }
-           }
-           );
+            @Override
+            public void onCancel(Platform platform, int i) {
+                Toast.makeText(mContext, "分享取消", Toast.LENGTH_SHORT).show();
+            }
+        });
            oks.show(mContext);
        }
 }
