@@ -82,7 +82,7 @@ public class MobLoginModule extends ReactContextBaseJavaModule {
         oks.setCallback(new PlatformActionListener (){
             @Override
             public void onComplete(Platform platform, int action, HashMap<String, Object> hashMap ) {
-                Toast.makeText(mContext, "分享成功", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "分享成功", Toast.LENGTH_SHORT).show();
                 WritableMap params = Arguments.createMap();
                 params.putInt("type", ShareSDK.platformNameToId(platform.getName()));
                 params.putString("platformName", platform.getName());
