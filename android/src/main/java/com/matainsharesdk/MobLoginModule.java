@@ -55,12 +55,26 @@ public class MobLoginModule extends ReactContextBaseJavaModule {
         oks.setDialogMode();
         // 在自动授权时可以禁用SSO方式
         oks.disableSSOWhenAuthorize();
-        oks.setTitle(title);
-        oks.setTitleUrl(url);
-        oks.setText(text);
-        //oks.setImagePath("/sdcard/test-pic.jpg");  //分享sdcard目录下的图片
-        oks.setImageUrl(imageUrl);
-        oks.setUrl(url); //微信不绕过审核分享链接
+          if (title != null) {
+               oks.setTitle(title);
+           }
+           if (url != null) {
+              oks.setTitleUrl(url);
+           }
+           if (text != null) {
+               oks.setText(text);
+           }
+           if (imagePath != null) {
+               //oks.setImagePath("/sdcard/test-pic.jpg");  //分享sdcard目录下的图片
+               oks.setImagePath(imagePath);
+           }
+           if(imageUrl != null) {
+               oks.setImageUrl(imageUrl);
+           }
+
+           if (url != null) {
+               oks.setUrl(url); //微信不绕过审核分享链接
+           }
         oks.setSite("ShareSDK");  //QZone分享完之后返回应用时提示框上显示的名称
         oks.setVenueName("ShareSDK");
         oks.setVenueDescription("This is a beautiful place!");
