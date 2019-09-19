@@ -64,10 +64,8 @@ public class MobLoginModule extends ReactContextBaseJavaModule {
            if (text != null) {
                oks.setText(text);
            }
-           if (imagePath != null) {
                //oks.setImagePath("/sdcard/test-pic.jpg");  //分享sdcard目录下的图片
-               oks.setImagePath(imagePath);
-           }
+
            if(imageUrl != null) {
                oks.setImageUrl(imageUrl);
            }
