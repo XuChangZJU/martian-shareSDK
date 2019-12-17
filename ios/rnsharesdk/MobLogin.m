@@ -24,7 +24,7 @@ RCT_EXPORT_MODULE();
          *  在此事件中写入连接代码。第四个参数则为配置本地社交平台时触发，根据返回的平台类型来配置平台信息。
          *  如果您使用的时服务端托管平台信息时，第二、四项参数可以传入nil，第三项参数则根据服务端托管平台来决定要连接的社交SDK。
          */
-        
+
     }
     return self;
 }
@@ -32,18 +32,18 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)url :(NSString *)imgUrl resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject) {
-    
+
     _resolve = resolve;
     _reject = reject;
     dispatch_async(dispatch_get_main_queue(), ^{
-        
+
         NSString* string;
         NSString* string1 = content;
         NSString* string2 = url;
         string = [string1 stringByAppendingString:string2];
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
         //NSArray* imageArray = @[imgUrl];
-        [shareParams SSDKSetupShareParamsByText:string
+        [shareParams SSDKSetupShareParamsByText:string1
                                          images:[NSURL URLWithString:imgUrl]
                                             url:[NSURL URLWithString:url]
                                           title:title
@@ -57,7 +57,7 @@ RCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)
                            @(SSDKPlatformTypeWechat),
                            @(SSDKPlatformTypeSinaWeibo)
                            ];
-        
+
         SSUIShareActionSheetController *sheet = [ShareSDK showShareActionSheet:nil
                                                                          items:items
                                                                    shareParams:shareParams
@@ -72,12 +72,12 @@ RCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)
                                                                else if([NSNumber numberWithInteger: platformType] == [NSNumber numberWithInteger: 22]) {
                                                                    TEMP = @"Wechat";
                                                                }
-                                                               
+
                                                       else if          ([NSNumber numberWithInteger: platformType] == [NSNumber numberWithInteger: 23]) {
                                                                    TEMP = @"WechatTimeline";
                                                                }
                                                                switch (state) {
-                                                                       
+
                                                                    case SSDKResponseStateBegin:
                                                                    {
                                                                        //设置UI等操作
@@ -98,7 +98,7 @@ RCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)
                                                                    }
                                                                    case SSDKResponseStateCancel:
                                                                    {
-                                                                       
+
                                                                        break;
                                                                    }
                                                                    default:
@@ -115,7 +115,7 @@ RCT_EXPORT_METHOD(showShare:(NSString *)title :(NSString *)content :(NSString *)
 }
 + (void)shareResultFailed:(NSDictionary *)result
 {
-    
+
 }
 
 @end
